@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use App\Exceptions\api\v1\UserException;
+use App\Exceptions\api\v1\UserExceptionHandler;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -25,6 +27,12 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        $this->renderable(function (Throwable $e) {
+            if ($e instanceof UserException) {
+                return UserExceptionHandler::handle($e);
+            }
         });
     }
 }
