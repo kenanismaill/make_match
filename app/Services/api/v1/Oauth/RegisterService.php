@@ -12,6 +12,10 @@ use Illuminate\Support\Str;
 class RegisterService
 {
 
+    /**
+     * @param RegisterRequest $request
+     * @return User
+     */
     public function register(RegisterRequest $request): User
     {
         $data = $request->validated();
