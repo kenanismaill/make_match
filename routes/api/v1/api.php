@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\v1\Oauth\LoginController;
+use App\Http\Controllers\api\v1\Oauth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,5 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest', 'localization'])->group(function () {
     Route::post('oauth/login', [LoginController::class, 'login'])->name('auth.login');
+    Route::post('oauth/register', [RegisterController::class, 'register'])->name('auth.register');
 });
 
