@@ -20,12 +20,10 @@ class RegisterService
     {
         $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
-        $data['remember_token'] = Str::random(10);
 
         /** @var User $user */
         $user = User::query()->create($data);
         if ($user) {
-            Auth::login($user);
             $tokenData = $user->createToken('authentication')->accessToken;
             $user->access_token = $tokenData;
             WelcomeEmailJob::dispatch($user);
