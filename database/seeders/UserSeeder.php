@@ -24,8 +24,6 @@ class UserSeeder extends Seeder
             'name' => 'kenan ismail',
             'email' => 'kenanheso@gmail.com',
             'status' => UserType::ADMIN,
-            'profile_photo' => fake()->imageUrl,
-            'birth_date' => '1995-01-10',
             'email_verified_at' => now(),
             'password' => Hash::make('kenan-2015'),
             'remember_token' => Str::random(10),
