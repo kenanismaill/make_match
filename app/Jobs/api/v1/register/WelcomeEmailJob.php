@@ -28,6 +28,6 @@ class WelcomeEmailJob implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to(users: [$this->user->email])->send(new WelcomeEmail($this->user->name));
+        Mail::to(users: [$this->user->email])->send(new WelcomeEmail($this->user->full_name));
     }
 }

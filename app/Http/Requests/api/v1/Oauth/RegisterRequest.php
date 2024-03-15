@@ -18,7 +18,7 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [
+            'full_name' => [
                 'required',
                 'string',
                 'max:255',
@@ -27,24 +27,52 @@ class RegisterRequest extends FormRequest
             'email' => [
                 'required',
                 'string',
-                Rule::unique('users','email'),
+                Rule::unique('users', 'email'),
                 'email',
-            ],
-            'profile_photo' => [
-                'nullable',
-                'url'
-            ],
-            'birth_date' => [
-                'required',
-                'date',
-                'before_or_equal:' . now()->subYears(15)->format('Y-m-d')
             ],
             'password' => [
                 'required',
                 'string',
                 'min:5',
-                'confirmed'
-            ]
+                'confirmed',
+            ],
+            'profile' => [
+                'required',
+                'array',
+            ],
+            'profile.photo' => [
+                'nullable',
+                'url',
+            ],
+            'profile.birth_date' => [
+                'required',
+                'date',
+                'before_or_equal:' . now()->subYears(15)->format('Y-m-d'),
+            ],
+            'address' => [
+                'required',
+                'array',
+            ],
+            'address.country' => [
+                'required',
+                'string',
+            ],
+            'address.city' => [
+                'required',
+                'string',
+            ],
+            'address.street' => [
+                'required',
+                'string',
+            ],
+            'address.state' => [
+                'required',
+                'string',
+            ],
+            'address.postal_code' => [
+                'required',
+                'string',
+            ],
         ];
     }
 
@@ -65,6 +93,7 @@ class RegisterRequest extends FormRequest
             'date' => trans('validation.date'),
             'before_or_equal' => trans('validation.before_or_equal'),
             'confirmed' => trans('validation.confirmed'),
+            'array' => trans('validation.array'),
         ];
     }
 }

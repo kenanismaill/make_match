@@ -14,7 +14,7 @@ class WelcomeEmail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public string $userName)
+    public function __construct(public string $fullName)
     {
         //
     }
