@@ -46,7 +46,7 @@ class RegisterService
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('Error occurred during user registration: ' . $e->getMessage());
+            Log::error(trans('log.registration_error') . $e->getMessage());
         }
 
         return null;
