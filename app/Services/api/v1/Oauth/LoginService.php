@@ -2,7 +2,7 @@
 
 namespace App\Services\api\v1\Oauth;
 
-use App\Enums\api\v1\UserType;
+use App\Enums\api\v1\User\UserType;
 use App\Exceptions\api\v1\UserException;
 use App\Models\User;
 use Illuminate\Http\Request;

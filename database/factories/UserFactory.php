@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\api\v1\UserType;
+use App\Enums\api\v1\User\UserType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;

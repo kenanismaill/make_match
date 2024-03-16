@@ -1,6 +1,7 @@
 <?php
 
-use App\Enums\api\v1\User\UserType;
+use App\Models\Team;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,14 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('team_user', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name')->index();
-            $table->string('email')->unique();
-            $table->tinyInteger('status')->default(UserType::SUBSCRIBER);
-            $table->string('password');
-            $table->timestamp('email_verified_at')->nullable();
-            $table->rememberToken();
+            $table->foreignIdFor(Team::class)->index()->constrained();
+            $table->foreignIdFor(User::class)->index()->constrained();
 
             $table->softDeletes();
             $table->timestamps();
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('team_user');
     }
 };
