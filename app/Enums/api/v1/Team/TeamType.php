@@ -8,4 +8,9 @@ final class TeamType extends Enum
 {
     const MEDIUM = 1;
     const LARGE = 2;
+
+    public static $capacity = [
+        self::MEDIUM => 6,
+        self::LARGE => 12
+    ];
 }

@@ -12,10 +12,9 @@ class TeamUser extends Pivot
     use HasFactory, SoftDeletes;
 
     protected $table = 'team_user';
-//    protected $fillable = [
-//        'team_id',
-//        'user_id',
-//    ];
+    protected $casts = [
+        'is_owner' => 'boolean'
+    ];
 
     public function team(): BelongsTo
     {

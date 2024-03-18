@@ -18,7 +18,7 @@ class TeamSeeder extends Seeder
 
         $teams->each(function ($team) {
             $users = User::query()->inRandomOrder()->take(rand(1, 6))->pluck('id')->toArray();
-            $team->users()->sync($users, ['created_at' => now(), 'updated_at' => now()]);
+            $team->players()->sync($users, ['created_at' => now(), 'updated_at' => now()]);
         });
     }
 }

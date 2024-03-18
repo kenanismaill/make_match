@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Team::class)->index()->constrained();
             $table->foreignIdFor(User::class)->index()->constrained();
-
+            $table->boolean('is_owner')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });
