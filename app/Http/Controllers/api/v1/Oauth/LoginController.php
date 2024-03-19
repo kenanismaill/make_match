@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\api\v1\Oauth;
 
-use App\Exceptions\api\v1\UserException;
+use App\Exceptions\api\v1\ApiException;
 use App\Http\Controllers\Controller;
 use App\Services\api\v1\Oauth\LoginService;
 use Illuminate\Http\JsonResponse;
@@ -20,7 +20,7 @@ class LoginController extends Controller
      *
      * @param Request $request
      * @return JsonResponse
-     * @throws UserException
+     * @throws ApiException
      */
     public function login(Request $request): JsonResponse
     {

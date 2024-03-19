@@ -4,7 +4,7 @@ namespace App\Exceptions\api\v1;
 
 use Exception;
 
-class UserException extends Exception
+class ApiException extends Exception
 {
     protected $errorCode;
 

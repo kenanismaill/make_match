@@ -1,8 +1,6 @@
 <?php
 
 return [
-    /** RegisterRequest */
-
     'required' => 'حقل :attribute مطلوب.',
     'string' => 'يجب أن يكون :attribute نصًا.',
     'max' => [
@@ -17,6 +15,7 @@ return [
     'date' => 'يجب أن يكون :attribute تاريخًا صالحًا.',
     'before_or_equal' => 'يجب أن يكون :attribute تاريخًا قبل أو يساوي اليوم.',
     'confirmed' => 'لا يتطابق تأكيد :attribute.',
-
-    /** end RegisterRequest */
+    'in' => 'يجب أن يكون :attribute أحد الأنواع التالية: :values.',
+    'array' => 'يجب أن يكون :attribute مصفوفة.',
+    'exists' => 'القيمة المختارة في :attribute غير صالحة.',
 ];

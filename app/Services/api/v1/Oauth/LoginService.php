@@ -3,7 +3,7 @@
 namespace App\Services\api\v1\Oauth;
 
 use App\Enums\api\v1\User\UserType;
-use App\Exceptions\api\v1\UserException;
+use App\Exceptions\api\v1\ApiException;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +41,7 @@ class LoginService
      *
      * @param Request $request
      * @return array|null
-     * @throws UserException
+     * @throws ApiException
      */
     public function login(Request $request): ?array
     {
@@ -49,7 +49,7 @@ class LoginService
             /** @var User $user */
             $user = Auth::user();
             if (in_array($user->status, UserType::$invlaidUser)) {
-                throw new UserException(10001);
+                throw new ApiException(10001);
             }
             return $this->generateAccessToken($request);
         }

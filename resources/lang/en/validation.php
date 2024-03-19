@@ -1,8 +1,6 @@
 <?php
 
 return [
-    /** RegisterRequest */
-
     'required' => 'The :attribute field is required.',
     'string' => 'The :attribute must be a string.',
     'max' => [
@@ -17,6 +15,7 @@ return [
     'date' => 'The :attribute must be a valid date.',
     'before_or_equal' => 'The :attribute must be a date before or equal to today.',
     'confirmed' => 'The :attribute confirmation does not match.',
-
-    /** end RegisterRequest */
+    'in' => 'The :attribute must be one of the following types: :values.',
+    'array' => 'The :attribute must be an array.',
+    'exists' => 'The selected :attribute is invalid.',
 ];

@@ -7,9 +7,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;;
 
-class UserExceptionHandler extends ExceptionHandler
+class ApiExceptionHandler extends ExceptionHandler
 {
-    public static function handle(UserException $e): JsonResponse
+    public static function handle(ApiException $e): JsonResponse
     {
         $errorCode = $e->getErrorCode();
         $errorData = Config::get("errorCodes.$errorCode");

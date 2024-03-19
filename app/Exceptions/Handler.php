@@ -2,8 +2,8 @@
 
 namespace App\Exceptions;
 
-use App\Exceptions\api\v1\UserException;
-use App\Exceptions\api\v1\UserExceptionHandler;
+use App\Exceptions\api\v1\ApiException;
+use App\Exceptions\api\v1\ApiExceptionHandler;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -30,8 +30,8 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (Throwable $e) {
-            if ($e instanceof UserException) {
-                return UserExceptionHandler::handle($e);
+            if ($e instanceof ApiException) {
+                return ApiExceptionHandler::handle($e);
             }
         });
     }

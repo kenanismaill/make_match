@@ -1,8 +1,6 @@
 <?php
 
 return [
-    /** RegisterRequest */
-
     'required' => ':attribute alanı gereklidir.',
     'string' => ':attribute alanı bir metin olmalıdır.',
     'max' => [
@@ -17,6 +15,7 @@ return [
     'date' => ':attribute alanı geçerli bir tarih olmalıdır.',
     'before_or_equal' => ':attribute alanı bugünden önce veya bugüne eşit bir tarih olmalıdır.',
     'confirmed' => ':attribute onayı eşleşmiyor.',
-
-    /** end RegisterRequest */
+    'in' => ':attribute alanı aşağıdaki tiplerden biri olmalıdır: :values.',
+    'array' => ':attribute alanı dizi olmalıdır.',
+    'exists' => 'Seçilen :attribute geçersiz.',
 ];
