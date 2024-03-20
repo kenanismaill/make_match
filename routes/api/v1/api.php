@@ -15,13 +15,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::middleware(['localization'])->group(function () {
+    Route::middleware('guest')->group(function () {
+        Route::post('oauth/login', [LoginController::class, 'login'])->name('auth.login');
+        Route::post('oauth/register', [RegisterController::class, 'register'])->name('auth.register');
+    });
 
-Route::middleware(['guest', 'localization'])->group(function () {
-    Route::post('oauth/login', [LoginController::class, 'login'])->name('auth.login');
-    Route::post('oauth/register', [RegisterController::class, 'register'])->name('auth.register');
-});
-
-Route::middleware('auth:api')->group(function () {
-    Route::apiResource('/team', TeamController::class);
+    Route::middleware('auth:api')->group(function () {
+        Route::apiResource('/team', TeamController::class);
+    });
 });
 

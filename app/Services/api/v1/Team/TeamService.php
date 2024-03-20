@@ -25,6 +25,9 @@ class TeamService
         try {
             /** @var Team $team */
             $team = Team::query()->create($request->validated());
+            /** @var User $user */
+            $user = Auth::user();
+            $user->teams()->attach($team, ['is_owner' => true]);
             if ($request->has('players')) {
                 $team->players()->sync($request->get('players'));
             }
