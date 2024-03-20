@@ -17,6 +17,8 @@ class Address extends Model
         'street',
         'state',
         'postal_code',
+        'latitude',
+        'longitude',
     ];
 
     public function addressable(): MorphTo

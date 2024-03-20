@@ -29,6 +29,8 @@ class AddressFactory extends Factory
             'postal_code' => $this->faker->postcode(),
             'addressable_id' => $user->id,
             'addressable_type' => User::class,
+            'latitude' => $this->faker->latitude,
+            'longitude' => $this->faker->latitude,
         ];
     }
 }

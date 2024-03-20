@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('street');
             $table->string('state');
             $table->string('postal_code');
+            $table->decimal('latitude', 10, 8)->nullable();
+            $table->decimal('longitude', 11, 8)->nullable();
 
             $table->softDeletes();
             $table->timestamps();

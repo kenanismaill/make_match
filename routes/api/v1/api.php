@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\v1\Oauth\LoginController;
 use App\Http\Controllers\api\v1\Oauth\RegisterController;
 use App\Http\Controllers\api\v1\Team\TeamController;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +26,33 @@ Route::middleware(['localization'])->group(function () {
         Route::apiResource('/team', TeamController::class);
     });
 });
+
+Route::get('location/search', function (\Illuminate\Http\Request $request) {
+    $apiKey = env('GOOGLE_MAP_API_KEY');
+    $address = \App\Models\User::find(10)->addresses()->first();
+    $latitude = 41.21782701971226;
+    $longitude = 32.6489063395231;
+
+    // Make a request to Google Places API Nearby Search
+    $response = Http::get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', [
+        'key' => $apiKey,
+        'location' => "$latitude,$longitude",
+        'radius' => 5000, // Specify radius in meters
+        'type' => 'stadium', // Filter by type 'stadium'
+    ]);
+
+    // Decode the JSON response
+    $placesData = $response->json();
+//    dd($placesData);
+    // Extract relevant information from the response
+    $stadiums = collect($placesData['results'])->map(function ($result) {
+        return [
+            'name' => $result['name'],
+            'latitude' => $result['geometry']['location']['lat'],
+            'longitude' => $result['geometry']['location']['lng'],
+        ];
+    });
+
+    return response()->json($stadiums);
+})->name('location.search');
 
