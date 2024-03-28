@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Address;
+use App\Observers\api\v1\Address\AddressObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -25,7 +27,9 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Address::observe([
+            AddressObserver::class
+        ]);
     }
 
     /**

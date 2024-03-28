@@ -27,8 +27,13 @@ Route::middleware(['localization'])->group(function () {
     });
 });
 
+
+Route::get('test', function () {
+    $address = \App\Models\Address::find(11);
+    return \App\Http\Resources\api\v1\Address\AddressResource::make($address);
+});
 Route::get('location/search', function (\Illuminate\Http\Request $request) {
-    $apiKey = env('GOOGLE_MAP_API_KEY');
+    $apiKey = env('GOOGLE_MAPS_API_KEY');
     $address = \App\Models\User::find(10)->addresses()->first();
     $latitude = 41.21782701971226;
     $longitude = 32.6489063395231;
@@ -43,6 +48,7 @@ Route::get('location/search', function (\Illuminate\Http\Request $request) {
 
     // Decode the JSON response
     $placesData = $response->json();
+
 //    dd($placesData);
     // Extract relevant information from the response
     $stadiums = collect($placesData['results'])->map(function ($result) {
@@ -56,3 +62,15 @@ Route::get('location/search', function (\Illuminate\Http\Request $request) {
     return response()->json($stadiums);
 })->name('location.search');
 
+Route::get('/autocomplete', function (\Illuminate\Http\Request $request) {
+    $input = $request->get('input');
+    $location = $request->get('location'); // Latitude,Longitude of the user's location
+    $radius = 5000; // Radius in meters to search within
+
+    $apiKey = env('GOOGLE_MAPS_API_KEY');
+    $url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&key=$apiKey&location=$location&radius=$radius&type=stadium";
+
+    $response = Http::get($url)->json();
+
+    return response()->json($response);
+});
