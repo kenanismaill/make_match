@@ -1,19 +1,23 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace App\Enums\api\v1\User;
 
-use BenSampo\Enum\Enum;
-
-final class UserType extends Enum
+enum UserType: int
 {
-    const ADMIN = 1;
-    const SUBSCRIBER = 2;
-    const VIP = 3;
-    const INACTIVE = 4;
-    const BANNED = 5;
+    case ADMIN = 1;
+    case SUBSCRIBER = 2;
+    case VIP = 3;
+    case INACTIVE = 4;
+    case BANNED = 5;
 
-    public static array $invlaidUser = [
+    public const INVALID_STATUS = [
+        self::BANNED,
         self::INACTIVE,
-        self::BANNED
     ];
+
+    public static function isInvalidUser(int $userStatus): bool
+    {
+        return in_array($userStatus, self::INVALID_STATUS);
+    }
 }

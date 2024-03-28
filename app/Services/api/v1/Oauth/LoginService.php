@@ -48,7 +48,7 @@ class LoginService
         if (Auth::attempt($request->only('password', 'email'))) {
             /** @var User $user */
             $user = Auth::user();
-            if (in_array($user->status, UserType::$invlaidUser)) {
+            if (UserType::isInvalidUser(userStatus: $user->status)) {
                 throw new ApiException(10001);
             }
             return $this->generateAccessToken($request);

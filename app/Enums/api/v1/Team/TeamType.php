@@ -1,16 +1,20 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace App\Enums\api\v1\Team;
 
-use BenSampo\Enum\Enum;
+use App\Traits\api\v1\Enums\EnumNamesTrait;
 
-final class TeamType extends Enum
+enum TeamType: int
 {
-    const MEDIUM = 1;
-    const LARGE = 2;
+    case MEDIUM = 1;
+    case LARGE = 2;
 
-    public static $capacity = [
-        self::MEDIUM => 6,
-        self::LARGE => 12
-    ];
+    public static function capacity(self $type): int
+    {
+        return match ($type->value) {
+            self::MEDIUM->value => 6,
+            self::LARGE->value => 12,
+            default => 0,
+        };
+    }
 }

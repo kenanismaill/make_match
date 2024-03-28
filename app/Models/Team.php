@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\api\v1\Team\TeamType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +16,10 @@ class Team extends Model
     protected $fillable = [
         'name',
         'type'
+    ];
+
+    protected $casts = [
+        'type' => TeamType::class
     ];
 
     public function players(): BelongsToMany

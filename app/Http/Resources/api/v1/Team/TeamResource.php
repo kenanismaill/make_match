@@ -17,8 +17,8 @@ class TeamResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'type' => TeamType::getDescription($this->type),
-            'capacity' => TeamType::$capacity[$this->type],
+            'type' => $this->type->name,
+            'capacity' => TeamType::capacity(type: $this->type),
             'players_count' => $this->whenLoaded('players', function (){
                 return $this->players->count();
             }),

@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Enums\api\v1\Team\TeamType;
+use App\Enums\api\v1\TestEnum;
+use App\Enums\api\v1\User\UserType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +21,7 @@ class TeamFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'type' => $this->faker->randomElement(TeamType::getValues()),
+            'type' => $this->faker->randomElement(TeamType::cases()),
         ];
     }
 }

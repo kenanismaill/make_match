@@ -33,7 +33,7 @@ class UpdateTeamRequest extends FormRequest
             ],
             'type' => [
                 'nullable',
-                Rule::in(TeamType::getValues())
+                Rule::in(TeamType::cases())
             ],
             'players' => [
                 'array',
