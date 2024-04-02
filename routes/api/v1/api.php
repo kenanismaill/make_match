@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\v1\Oauth\LoginController;
 use App\Http\Controllers\api\v1\Oauth\RegisterController;
 use App\Http\Controllers\api\v1\Team\TeamController;
+use App\Http\Controllers\api\v1\Stadium\StadiumController;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,7 @@ Route::middleware(['localization'])->group(function () {
 
     Route::middleware('auth:api')->group(function () {
         Route::apiResource('/team', TeamController::class);
+        Route::apiResource('/stadium', StadiumController::class);
     });
 });
 

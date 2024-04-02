@@ -1,9 +1,6 @@
 <?php
 
 namespace App\Enums\api\v1\Team;
-
-use App\Traits\api\v1\Enums\EnumNamesTrait;
-
 enum TeamType: int
 {
     case MEDIUM = 1;
