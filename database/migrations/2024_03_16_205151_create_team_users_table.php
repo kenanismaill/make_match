@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('team_user', function (Blueprint $table) {
+        Schema::create('team_player', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Team::class)->index()->constrained();
             $table->foreignIdFor(User::class)->index()->constrained();
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('team_user');
+        Schema::dropIfExists('team_player');
     }
 };

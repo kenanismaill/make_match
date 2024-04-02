@@ -9,12 +9,14 @@ use App\Http\Requests\api\v1\Team\UpdateTeamRequest;
 use App\Http\Resources\api\v1\Team\TeamResource;
 use App\Models\Team;
 use App\Services\api\v1\Team\TeamService;
+use App\Traits\api\v1\Enums\General\PaginateResourceTrait;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
 class TeamController extends Controller
 {
+    use PaginateResourceTrait;
     public function __construct(
         private readonly TeamService $teamService
     )
@@ -26,11 +28,12 @@ class TeamController extends Controller
      */
     public function index(Request $request): AnonymousResourceCollection
     {
-        $perPage = $request->input('per_page', 10);
-        $page = $request->input('page', 1);
-
-        $teams = Team::with('players:id,full_name')->paginate($perPage, ['*'], 'page', $page);
-        return TeamResource::collection($teams);
+        return $this->paginateAndReturnResource(
+            request: $request,
+            model: Team::class,
+            resourceClass: TeamResource::class,
+            relations: ['players:id,full_name', 'players.profile']
+        );
     }
 
 

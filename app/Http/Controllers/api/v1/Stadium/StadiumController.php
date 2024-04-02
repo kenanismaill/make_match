@@ -5,21 +5,25 @@ namespace App\Http\Controllers\api\v1\Stadium;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\api\v1\Stadium\StadiumResource;
 use App\Models\Stadium;
+use App\Traits\api\v1\Enums\General\PaginateResourceTrait;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class StadiumController extends Controller
 {
+    use PaginateResourceTrait;
+
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request): AnonymousResourceCollection
     {
-        $perPage = $request->input('per_page', 10);
-        $page = $request->input('page', 1);
-
-        $teams = Stadium::with('address')->paginate($perPage, ['*'], 'page', $page);
-
-        return StadiumResource::collection($teams);
+        return $this->paginateAndReturnResource(
+            request: $request,
+            model: Stadium::class,
+            resourceClass: StadiumResource::class,
+            relations: ['address']
+        );
     }
 
     /**

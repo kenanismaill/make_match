@@ -59,7 +59,8 @@ class User extends Authenticatable
 
     public function teams(): BelongsToMany
     {
-        return $this->belongsToMany(Team::class)->using(TeamUser::class)
+        return $this->belongsToMany(Team::class,'team_player')
+            ->using(TeamPlayer::class)
             ->withPivot(['is_owner'])
             ->withTimestamps();
     }

@@ -23,7 +23,8 @@ class Team extends Model
 
     public function players(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->using(TeamUser::class)
+        return $this->belongsToMany(User::class, 'team_player')
+            ->using(TeamPlayer::class)
             ->withPivot(['is_owner'])
             ->withTimestamps();
     }

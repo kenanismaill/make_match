@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TeamUser extends Pivot
+class TeamPlayer extends Pivot
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'team_user';
+    protected $table = 'team_player';
     protected $casts = [
         'is_owner' => 'boolean'
     ];
@@ -21,7 +21,7 @@ class TeamUser extends Pivot
         return $this->belongsTo(Team::class);
     }
 
-    public function user(): BelongsTo
+    public function player(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
