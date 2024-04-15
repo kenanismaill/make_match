@@ -23,7 +23,7 @@ class ProfileFactory extends Factory
             'birth_date' => $this->faker->date(),
             'phone_number' => $this->faker->phoneNumber(),
             'photo' => $this->faker->imageUrl(),
-            'about_me' => $this->faker->paragraph(100),
+            'about_me' => $this->faker->text(100),
         ];
     }
 
