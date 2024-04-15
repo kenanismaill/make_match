@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Matches;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class MatchesSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Matches::factory()->count(5)->create();
     }
 }

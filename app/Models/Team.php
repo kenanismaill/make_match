@@ -28,4 +28,24 @@ class Team extends Model
             ->withPivot(['is_owner'])
             ->withTimestamps();
     }
+
+    public function homeMatches(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Matches::class,
+            'match_team',
+            'home_team',
+            'match_id'
+        );
+    }
+
+    public function awayMatches(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Matches::class,
+            'match_team',
+            'away_team',
+            'match_id'
+        );
+    }
 }

@@ -31,8 +31,8 @@ Route::middleware(['localization'])->group(function () {
 
 
 Route::get('test', function () {
-    $address = \App\Models\Address::find(11);
-    return \App\Http\Resources\api\v1\Address\AddressResource::make($address);
+    $test = \App\Models\MatchTeam::find(3);
+    dd($test->match);
 });
 Route::get('location/search', function (\Illuminate\Http\Request $request) {
     $apiKey = env('GOOGLE_MAPS_API_KEY');
