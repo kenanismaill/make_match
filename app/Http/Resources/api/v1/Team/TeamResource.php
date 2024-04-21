@@ -3,6 +3,7 @@
 namespace App\Http\Resources\api\v1\Team;
 
 use App\Enums\api\v1\Team\TeamType;
+use App\Http\Resources\api\v1\Match\MatchResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -36,6 +37,12 @@ class TeamResource extends JsonResource
 
                     return $playerInfos;
                 });
+            }),
+            'home_matches' => $this->whenLoaded('homeMatches', function () {
+                return MatchResource::collection($this->homeMatches);
+            }),
+            'away_matches' => $this->whenLoaded('awayMatches', function () {
+                return MatchResource::collection($this->awayMatches);
             }),
         ];
     }

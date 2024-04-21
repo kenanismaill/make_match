@@ -32,7 +32,7 @@ class TeamController extends Controller
             request: $request,
             model: Team::class,
             resourceClass: TeamResource::class,
-            relations: ['players:id,full_name', 'players.profile']
+            relations: ['players:id,full_name', 'players.profile', 'homeMatches', 'awayMatches']
         );
     }
 
@@ -51,7 +51,7 @@ class TeamController extends Controller
      */
     public function show(Team $team): TeamResource
     {
-        return TeamResource::make($team->load(['players:id,full_name']));
+        return TeamResource::make($team->load(['players:id,full_name', 'homeMatches', 'awayMatches']));
     }
 
     /**

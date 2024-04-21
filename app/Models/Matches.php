@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\api\v1\Matches\MatchStatus;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
@@ -16,11 +18,22 @@ class Matches extends Model
     protected $fillable = [
         'start_date',
         'location',
+        'status',
         'result',
         'home_team',
         'away_team',
     ];
 
+    protected $casts = [
+        'status' => MatchStatus::class,
+    ];
+
+    public function result(): Attribute
+    {
+        return Attribute::make(
+            get: fn(mixed $value) => is_null($value) ? '0-0' : $value
+        );
+    }
 
     public function homeTeam(): HasOneThrough
     {
