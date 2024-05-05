@@ -40,10 +40,10 @@ class Matches extends Model
         return $this->hasOneThrough(
             Team::class,
             MatchTeam::class,
-            'match_id', // Foreign key on the MatchTeam table
-            'id', // Local key on the Team table
-            'id', // Local key on the Matches table
-            'home_team' // Foreign key on the MatchTeam table
+            'match_id',
+            'id',
+            'id',
+            'home_team'
         );
     }
 
@@ -52,10 +52,10 @@ class Matches extends Model
         return $this->hasOneThrough(
             Team::class,
             MatchTeam::class,
-            'match_id', // Foreign key on the MatchTeam table
-            'id', // Local key on the Team table
-            'id', // Local key on the Matches table
-            'away_team' // Foreign key on the MatchTeam table
+            'match_id',
+            'id',
+            'id',
+            'away_team'
         );
     }
 }
