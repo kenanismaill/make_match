@@ -15,7 +15,7 @@ return [
 
     /** Matches */
     30001 => [
-        'message' => 'log.match.user.not_have_team',
+        'message' => 'match.user.not_have_team',
         'code' => '#30001',
     ]
     // Add more error codes and messages as needed

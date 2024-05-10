@@ -4,6 +4,7 @@ namespace App\Exceptions\api\v1;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 
 class ApiExceptionHandler extends ExceptionHandler
@@ -14,7 +15,7 @@ class ApiExceptionHandler extends ExceptionHandler
         $errorData = Config::get("errorCodes.$errorCode");
 
         if ($errorData) {
-            $errorMessage = trans($errorData['message']);
+            $errorMessage = trans($errorData['message'], [], App::getLocale());
             $errorCode = $errorData['code'];
 
             return response()->json([
