@@ -18,4 +18,5 @@ return [
     'in' => 'يجب أن يكون :attribute أحد الأنواع التالية: :values.',
     'array' => 'يجب أن يكون :attribute مصفوفة.',
     'exists' => 'القيمة المختارة في :attribute غير صالحة.',
+    'date_format' => 'لا يتطابق :attribute مع التنسيق Y-m-d H:i:s.',
 ];

@@ -15,6 +15,8 @@ class RegisterRequest extends FormRequest
         return true;
     }
 
+    protected $stopOnFirstFailure = true;
+
     public function rules(): array
     {
         return [

@@ -28,6 +28,9 @@ Route::middleware(['localization'])->group(function () {
         Route::apiResource('/team', TeamController::class);
         Route::apiResource('/stadium', StadiumController::class);
         Route::apiResource('/match', MatchController::class);
+        Route::controller(MatchController::class)->group(function () {
+            Route::get('match', 'post');
+        });
     });
 });
 

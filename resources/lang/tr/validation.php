@@ -18,4 +18,5 @@ return [
     'in' => ':attribute alanı aşağıdaki tiplerden biri olmalıdır: :values.',
     'array' => ':attribute alanı dizi olmalıdır.',
     'exists' => 'Seçilen :attribute geçersiz.',
+    'date_format' => ':attribute biçimi Y-m-d H:i:s ile eşleşmiyor.',
 ];

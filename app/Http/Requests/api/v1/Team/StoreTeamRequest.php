@@ -18,6 +18,8 @@ class StoreTeamRequest extends FormRequest
         return Auth::user();
     }
 
+    protected $stopOnFirstFailure = true;
+
     /**
      * Get the validation rules that apply to the request.
      *
