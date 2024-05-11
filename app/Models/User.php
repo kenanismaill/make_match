@@ -6,7 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -52,9 +52,9 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
-    public function addresses(): MorphMany
+    public function addresses(): MorphOne
     {
-        return $this->morphMany(Address::class, 'addressable');
+        return $this->morphOne(Address::class, 'addressable')->latestOfMany();
     }
 
     public function teams(): BelongsToMany
@@ -62,6 +62,15 @@ class User extends Authenticatable
         return $this->belongsToMany(Team::class,'team_player')
             ->using(TeamPlayer::class)
             ->withPivot(['is_owner'])
+            ->withTimestamps();
+    }
+
+    public function ownTeams(): BelongsToMany
+    {
+        return $this->belongsToMany(Team::class,'team_player')
+            ->using(TeamPlayer::class)
+            ->withPivot(['is_owner'])
+            ->wherePivot('is_owner', true)
             ->withTimestamps();
     }
 }
