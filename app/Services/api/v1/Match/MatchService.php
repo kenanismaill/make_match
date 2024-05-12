@@ -6,7 +6,6 @@ use App\Exceptions\api\v1\ApiException;
 use App\Http\Requests\api\v1\Match\StoreMatchRequest;
 use App\Models\Matches;
 use App\Models\MatchTeam;
-use App\Models\Team;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;

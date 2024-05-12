@@ -13,7 +13,7 @@ class SetUpCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'app:set-up';
+    protected $signature = 'app:setup';
 
     /**
      * The console command description.

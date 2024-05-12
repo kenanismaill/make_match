@@ -36,6 +36,7 @@ Route::middleware(['localization'])->group(function () {
 
 
 Route::get('test', function () {
+    return phpinfo();
     $test = \App\Models\MatchTeam::find(3);
     dd($test->match);
 });
