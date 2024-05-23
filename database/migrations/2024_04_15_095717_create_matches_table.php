@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('matches', function (Blueprint $table) {
-            $table->id();
+            $table->id()->startingValue(1000);
             $table->dateTime('start_date');
             $table->string('status')->default(MatchStatus::SCHEDULED);
             $table->string('location')->nullable();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api\v1\Match;
 
+use App\Exceptions\api\v1\ApiException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\v1\Match\StoreMatchRequest;
 use App\Http\Resources\api\v1\Match\MatchResource;
@@ -40,6 +41,7 @@ class MatchController extends Controller
     /**
      * @param StoreMatchRequest $storeMatchRequest
      * @return Response
+     * @throws ApiException
      */
     public function store(StoreMatchRequest $storeMatchRequest): Response
     {

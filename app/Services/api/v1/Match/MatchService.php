@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Log;
 class MatchService
 {
 
+    /**
+     * @throws ApiException
+     */
     public function store(StoreMatchRequest $storeMatchRequest): Matches
     {
         /** @var User $user */
