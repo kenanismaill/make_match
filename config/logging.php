@@ -33,7 +33,7 @@ return [
 
     'deprecations' => [
         'channel' => env('LOG_DEPRECATIONS_CHANNEL', 'null'),
-        'trace' => false,
+        'trace' => true,
     ],
 
     /*
@@ -54,7 +54,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['single', 'slack'],
             'ignore_exceptions' => false,
         ],
 
