@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Events\api\v1\Application\ApiExceptionEvent;
-use App\Listeners\api\v1\Application\ApiExceptionListener;
 use App\Models\Address;
 use App\Observers\api\v1\Address\AddressObserver;
 use Illuminate\Auth\Events\Registered;
@@ -22,9 +20,6 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        ApiExceptionEvent::class => [
-            ApiExceptionListener::class
-        ]
     ];
 
     /**

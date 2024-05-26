@@ -4,6 +4,7 @@ namespace App\Services\api\v1\Match;
 
 use App\Exceptions\api\v1\ApiException;
 use App\Http\Requests\api\v1\Match\StoreMatchRequest;
+use App\Http\Requests\api\v1\Match\UpdateMatchRequest;
 use App\Models\Matches;
 use App\Models\MatchTeam;
 use App\Models\User;
@@ -43,6 +44,15 @@ class MatchService
             DB::rollBack();
             Log::alert($e->getMessage());
             throw new ApiException(10001);
+        }
+    }
+
+    public function update(UpdateMatchRequest $request, Matches $match): Matches
+    {
+        $data = $request->validated();
+        $match->update($data);
+        if (isset($data['away_team'])) {
+
         }
     }
 }

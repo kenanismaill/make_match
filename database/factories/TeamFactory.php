@@ -21,7 +21,7 @@ class TeamFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'type' => $this->faker->randomElement(TeamType::cases()),
+            'size' => 23,
         ];
     }
 }

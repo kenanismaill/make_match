@@ -25,7 +25,7 @@ class ApiExceptionHandler extends ExceptionHandler
         }
         return response()->json([
             'code' => 500,
-            'message' => __('general.unknown_error'),
+            'message' => trans('general.unknown_error', [], App::getLocale()),
         ], 500);
     }
 }

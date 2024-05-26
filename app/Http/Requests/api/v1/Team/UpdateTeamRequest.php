@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\api\v1\Team;
 
-use App\Enums\api\v1\Team\TeamType;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -23,7 +23,7 @@ class UpdateTeamRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
@@ -33,9 +33,11 @@ class UpdateTeamRequest extends FormRequest
                 'max:255',
                 'min:2',
             ],
-            'type' => [
+            'size' => [
                 'nullable',
-                Rule::in(TeamType::cases())
+                'numeric',
+                'min:1',
+                'max:25',
             ],
             'players' => [
                 'array',
@@ -54,7 +56,9 @@ class UpdateTeamRequest extends FormRequest
             'string' => trans('validation.string'),
             'max' => trans('validation.max.string', ['max' => ':max']),
             'min' => trans('validation.min.string', ['min' => ':min']),
-            'type.in' => trans('validation.in', ['attribute' => trans('team.type')]),
+            'size.numeric' => trans('validation.numeric', ['attribute' => trans('team.size')]),
+            'size.min' => trans('validation.min.numeric', ['min' => 1]),
+            'size.max' => trans('validation.max.numeric', ['max' => 25]),
             'players.array' => trans('validation.array', ['attribute' => trans('team.players')]),
             'players.*.exists' => trans('validation.exists', ['attribute' => trans('team.player')]),
         ];

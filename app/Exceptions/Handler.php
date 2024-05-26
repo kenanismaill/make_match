@@ -2,7 +2,6 @@
 
 namespace App\Exceptions;
 
-use App\Events\api\v1\Application\ApiExceptionEvent;
 use App\Exceptions\api\v1\ApiException;
 use App\Exceptions\api\v1\ApiExceptionHandler;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -37,14 +36,14 @@ class Handler extends ExceptionHandler
     /**
      * @param $request
      * @param Throwable $e
-     * @return JsonResponse|\Symfony\Component\HttpFoundation\Response|void
+     * @return JsonResponse|RedirectResponse|Response|\Symfony\Component\HttpFoundation\Response
+     * @throws Throwable
      */
-    public function render($request, Throwable $e)
+    public function render($request, Throwable $e): Response|JsonResponse|RedirectResponse|\Symfony\Component\HttpFoundation\Response
     {
-        event(new ApiExceptionEvent($e));
         if ($e instanceof ApiException) {
             return ApiExceptionHandler::handle($e);
         }
-//        return parent::render($request, $e);
+        return parent::render($request, $e);
     }
 }

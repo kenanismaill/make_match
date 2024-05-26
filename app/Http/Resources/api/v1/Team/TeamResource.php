@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources\api\v1\Team;
 
-use App\Enums\api\v1\Team\TeamType;
 use App\Http\Resources\api\v1\Match\MatchResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -19,11 +18,7 @@ class TeamResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'type' => $this->type->name,
-            'capacity' => TeamType::capacity(type: $this->type),
-            'players_count' => $this->whenLoaded('players', function (){
-                return $this->players->count();
-            }),
+            'size' => $this->size,
             'players' => $this->whenLoaded('players', function () {
                 return $this->players->map(function ($player) {
                     $playerInfos = [
