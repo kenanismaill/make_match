@@ -16,6 +16,7 @@ class CreateMatchJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+
     /**
      * Create a new job instance.
      */
@@ -47,5 +48,13 @@ class CreateMatchJob implements ShouldQueue
         $awayTeamPlayers = $matchTeam->awayTeam->players->pluck('id')->toArray();
         $match->players()->sync(array_values(array_diff($homeTeamPlayers, $awayTeamPlayers)));
         Notification::send(auth()->user(),new CreateMatchNotification());
+    }
+
+    /**
+     * Determine number of times the job may be attempted.
+     */
+    public function tries(): int
+    {
+        return 1;
     }
 }

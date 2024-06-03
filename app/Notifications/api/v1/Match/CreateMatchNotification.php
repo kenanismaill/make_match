@@ -28,7 +28,7 @@ class CreateMatchNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['vonage'];
+        return ['mail'];
     }
 
     /**
@@ -44,7 +44,6 @@ class CreateMatchNotification extends Notification
 
     public function toVonage(object $notifiable): VonageMessage
     {
-        dd($notifiable);
         return (new VonageMessage)
             ->clientReference((string) $notifiable->id)
             ->content('match has created');
