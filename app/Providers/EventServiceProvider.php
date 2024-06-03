@@ -27,9 +27,9 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Address::observe([
-            AddressObserver::class
-        ]);
+//        Address::observe([
+//            AddressObserver::class
+//        ]);
     }
 
     /**
@@ -37,6 +37,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function shouldDiscoverEvents(): bool
     {
-        return false;
+        return true;
     }
 }

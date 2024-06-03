@@ -5,7 +5,9 @@ use App\Http\Controllers\api\v1\Oauth\LoginController;
 use App\Http\Controllers\api\v1\Oauth\RegisterController;
 use App\Http\Controllers\api\v1\Stadium\StadiumController;
 use App\Http\Controllers\api\v1\Team\TeamController;
+use App\Notifications\api\v1\Match\CreateMatchNotification;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,9 +39,10 @@ Route::middleware(['localization'])->group(function () {
 
 
 Route::get('test', function () {
-    return phpinfo();
-    $test = \App\Models\MatchTeam::find(3);
-    dd($test->match);
+    $users = \App\Models\User::query()->get();
+    Notification::send($users,new CreateMatchNotification());
+//    $match = \App\Models\User::find(1);
+//    dd($match->matches);
 });
 Route::get('location/search', function (\Illuminate\Http\Request $request) {
     $apiKey = env('GOOGLE_MAPS_API_KEY');

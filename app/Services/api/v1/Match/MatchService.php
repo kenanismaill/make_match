@@ -5,8 +5,8 @@ namespace App\Services\api\v1\Match;
 use App\Exceptions\api\v1\ApiException;
 use App\Http\Requests\api\v1\Match\StoreMatchRequest;
 use App\Http\Requests\api\v1\Match\UpdateMatchRequest;
+use App\Jobs\api\v1\Match\CreateMatchJob;
 use App\Models\Matches;
-use App\Models\MatchTeam;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +26,6 @@ class MatchService
         if (!$user->teams()->exists()) {
             throw new ApiException(10002);
         }
-
         if (!$user->ownTeams()->exists()) {
             throw new ApiException(10003);
         }
@@ -34,11 +33,13 @@ class MatchService
         try {
             /** @var Matches $match */
             $match = Matches::query()->create($storeMatchRequest->validated());
-            MatchTeam::create([
-                'match_id' => $match->id,
-                'home_team' => $user->ownTeams()?->first()->id, //todo:: may check from request
-                'away_team' => $storeMatchRequest->get('away_team_id'),
-            ]);
+            CreateMatchJob::dispatch(
+                $match->id,
+                $user->ownTeams()?->first()?->id,
+                $storeMatchRequest->get('away_team_id')
+            );
+
+            DB::commit();
             return $match;
         } catch (\Exception $e) {
             DB::rollBack();

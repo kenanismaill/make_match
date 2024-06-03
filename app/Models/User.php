@@ -59,7 +59,7 @@ class User extends Authenticatable
 
     public function teams(): BelongsToMany
     {
-        return $this->belongsToMany(Team::class,'team_player')
+        return $this->belongsToMany(Team::class, 'team_player')
             ->using(TeamPlayer::class)
             ->withPivot(['is_owner'])
             ->withTimestamps();
@@ -67,10 +67,22 @@ class User extends Authenticatable
 
     public function ownTeams(): BelongsToMany
     {
-        return $this->belongsToMany(Team::class,'team_player')
+        return $this->belongsToMany(Team::class, 'team_player')
             ->using(TeamPlayer::class)
-            ->withPivot(['is_owner'])
             ->wherePivot('is_owner', true)
+            ->withPivot(['is_owner'])
             ->withTimestamps();
+    }
+
+    public function matches(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Matches::class,
+            'match_player',
+            'player_id',
+            'match_id'
+        )->using(MatchPlayer::class)
+        /** you can use wherePivot to filter if he is accepted */
+        ->withPivot(['score', 'has_accepted_match', 'deleted_at'])->withTimestamps();
     }
 }

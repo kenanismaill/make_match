@@ -27,28 +27,19 @@ class RegisterService
             $userData['password'] = Hash::make($userData['password']);
 
             /** @var User $user */
-            $user = User::create($userData);
+            $user = User::query()->create($userData);
 
             if ($user) {
-                $profileData = $request->get('profile', []);
-                $profile = new Profile($profileData);
-                $user->profile()->save($profile);
-
-                $addressData = $request->get('address', []);
-                $address = new Address($addressData);
-                $user->addresses()->save($address);
-
+                $user->profile()->create($request->get('profile', []));
                 $tokenData = $user->createToken('authentication')->accessToken;
                 $user->access_token = $tokenData;
                 WelcomeEmailJob::dispatch($user);
                 DB::commit();
-                return $user;
             }
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error(trans('log.registration_error') . $e->getMessage());
         }
-
         return null;
     }
 }

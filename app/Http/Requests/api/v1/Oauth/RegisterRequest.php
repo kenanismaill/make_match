@@ -51,30 +51,6 @@ class RegisterRequest extends FormRequest
                 'date',
                 'before_or_equal:' . now()->subYears(15)->format('Y-m-d'),
             ],
-            'address' => [
-                'required',
-                'array',
-            ],
-            'address.country' => [
-                'required',
-                'string',
-            ],
-            'address.city' => [
-                'required',
-                'string',
-            ],
-            'address.street' => [
-                'required',
-                'string',
-            ],
-            'address.state' => [
-                'required',
-                'string',
-            ],
-            'address.postal_code' => [
-                'required',
-                'string',
-            ],
         ];
     }
 
