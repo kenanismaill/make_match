@@ -34,6 +34,7 @@ class MatchService
             /** @var Matches $match */
             $match = Matches::query()->create($storeMatchRequest->validated());
             CreateMatchJob::dispatch(
+                $user,
                 $match->id,
                 $user->ownTeams()?->first()?->id,
                 $storeMatchRequest->get('away_team_id')

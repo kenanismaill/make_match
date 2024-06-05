@@ -4,6 +4,7 @@ namespace App\Jobs\api\v1\Match;
 
 use App\Models\Matches;
 use App\Models\MatchTeam;
+use App\Models\User;
 use App\Notifications\api\v1\Match\CreateMatchNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -21,6 +22,7 @@ class CreateMatchJob implements ShouldQueue
      * Create a new job instance.
      */
     public function __construct(
+        public User $user,
         public int $matchId,
         public int $homeTeamId,
         public int $awayTeamId
@@ -47,7 +49,7 @@ class CreateMatchJob implements ShouldQueue
         $homeTeamPlayers = $matchTeam->homeTeam->players->pluck('id')->toArray();
         $awayTeamPlayers = $matchTeam->awayTeam->players->pluck('id')->toArray();
         $match->players()->sync(array_values(array_diff($homeTeamPlayers, $awayTeamPlayers)));
-        Notification::send(auth()->user(),new CreateMatchNotification());
+        Notification::send($this->user,new CreateMatchNotification());
     }
 
     /**

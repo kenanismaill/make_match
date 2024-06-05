@@ -41,6 +41,7 @@ Route::middleware(['localization'])->group(function () {
 Route::get('test', function () {
     $users = \App\Models\User::query()->get();
     Notification::send($users,new CreateMatchNotification());
+    dd("done");
 //    $match = \App\Models\User::find(1);
 //    dd($match->matches);
 });
