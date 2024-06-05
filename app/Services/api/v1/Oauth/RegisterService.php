@@ -5,7 +5,6 @@ namespace App\Services\api\v1\Oauth;
 use App\Http\Requests\api\v1\Oauth\RegisterRequest;
 use App\Jobs\api\v1\register\WelcomeEmailJob;
 use App\Models\Address;
-use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -30,12 +29,13 @@ class RegisterService
             $user = User::query()->create($userData);
 
             if ($user) {
-                $user->profile()->create($request->get('profile', []));
                 $tokenData = $user->createToken('authentication')->accessToken;
                 $user->access_token = $tokenData;
                 WelcomeEmailJob::dispatch($user);
                 DB::commit();
+                return $user;
             }
+            return null;
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error(trans('log.registration_error') . $e->getMessage());

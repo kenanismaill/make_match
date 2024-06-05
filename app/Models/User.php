@@ -5,7 +5,6 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -26,6 +25,9 @@ class User extends Authenticatable
         'email',
         'status',
         'password',
+        'phone_number',
+        'photo',
+        'about_me'
     ];
 
     /**
@@ -46,11 +48,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function profile(): HasOne
-    {
-        return $this->hasOne(Profile::class);
-    }
 
     public function addresses(): MorphOne
     {

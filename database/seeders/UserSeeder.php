@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
             'full_name' => 'kenan ismail',
             'email' => 'kenanheso@gmail.com',
             'status' => UserType::ADMIN,
+            'phone_number' => '+905511458369',
             'email_verified_at' => now(),
             'password' => Hash::make('kenan-2015'),
             'remember_token' => Str::random(10),

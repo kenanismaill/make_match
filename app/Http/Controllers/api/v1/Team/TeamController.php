@@ -32,7 +32,7 @@ class TeamController extends Controller
             request: $request,
             model: Team::class,
             resourceClass: TeamResource::class,
-            relations: ['players:id,full_name', 'players.profile', 'homeMatches', 'awayMatches']
+            relations: ['players:id,full_name', 'homeMatches', 'awayMatches']
         );
     }
 

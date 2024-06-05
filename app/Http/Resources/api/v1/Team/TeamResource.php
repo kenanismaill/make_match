@@ -21,17 +21,11 @@ class TeamResource extends JsonResource
             'size' => $this->size,
             'players' => $this->whenLoaded('players', function () {
                 return $this->players->map(function ($player) {
-                    $playerInfos = [
+                    return [
                         'id' => $player->id,
                         'full_name' => $player->full_name,
                         'is_owner' => $player->pivot->is_owner
                     ];
-
-                    if ($player->relationLoaded('profile')) {
-                        $playerInfos['profile'] = $player->profile;
-                    }
-
-                    return $playerInfos;
                 });
             }),
             'home_matches' => $this->whenLoaded('homeMatches', function () {

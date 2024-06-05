@@ -2,21 +2,23 @@
 
 return [
     'required' => ':attribute alanı gereklidir.',
-    'string' => ':attribute alanı bir metin olmalıdır.',
+    'string' => ':attribute bir dize olmalıdır.',
     'max' => [
-        'string' => ':attribute alanı en fazla :max karakter olabilir.',
+        'string' => ':attribute :max karakterden büyük olamaz.',
     ],
     'min' => [
-        'string' => ':attribute alanı en az :min karakter olmalıdır.',
+        'string' => ':attribute en az :min karakter olmalıdır.',
     ],
-    'email' => ':attribute alanı geçerli bir e-posta adresi olmalıdır.',
-    'unique' => ':attribute daha önce alınmış.',
-    'url' => ':attribute alanı geçerli bir URL olmalıdır.',
-    'date' => ':attribute alanı geçerli bir tarih olmalıdır.',
-    'before_or_equal' => ':attribute alanı bugünden önce veya bugüne eşit bir tarih olmalıdır.',
+    'email' => ':attribute geçerli bir e-posta adresi olmalıdır.',
+    'unique' => ':attribute zaten alınmış.',
+    'url' => ':attribute geçerli bir URL olmalıdır.',
+    'date' => ':attribute geçerli bir tarih olmalıdır.',
+    'before_or_equal' => ':attribute bugün veya bugünden önce bir tarih olmalıdır.',
     'confirmed' => ':attribute onayı eşleşmiyor.',
-    'in' => ':attribute alanı aşağıdaki tiplerden biri olmalıdır: :values.',
-    'array' => ':attribute alanı dizi olmalıdır.',
+    'in' => ':attribute şu türlerden biri olmalıdır: :values.',
+    'array' => ':attribute bir dizi olmalıdır.',
     'exists' => 'Seçilen :attribute geçersiz.',
-    'date_format' => ':attribute biçimi Y-m-d H:i:s ile eşleşmiyor.',
+    'date_format' => ':attribute Y-m-d H:i:s formatına uymuyor.',
+    'regex' => ':attribute formatı geçersiz.',
 ];
+

@@ -19,4 +19,5 @@ return [
     'array' => 'The :attribute must be an array.',
     'exists' => 'The selected :attribute is invalid.',
     'date_format' => 'The :attribute does not match the format Y-m-d H:i:s.',
+    'regex' => 'The :attribute format is invalid.',
 ];

@@ -29,8 +29,8 @@ class RegisterRequest extends FormRequest
             'email' => [
                 'required',
                 'string',
-                Rule::unique('users', 'email'),
                 'email',
+                Rule::unique('users', 'email'),
             ],
             'password' => [
                 'required',
@@ -38,40 +38,35 @@ class RegisterRequest extends FormRequest
                 'min:5',
                 'confirmed',
             ],
-            'profile' => [
+            'phone_number' => [
                 'required',
-                'array',
-            ],
-            'profile.photo' => [
-                'nullable',
-                'url',
-            ],
-            'profile.birth_date' => [
-                'required',
-                'date',
-                'before_or_equal:' . now()->subYears(15)->format('Y-m-d'),
-            ],
+                'string',
+                'regex:/^\+[0-9]{7,15}$/'
+            ]
         ];
     }
 
     public function messages(): array
     {
         return [
-            'required' => trans('validation.required'),
-            'string' => trans('validation.string'),
-            'max' => [
-                'string' => trans('validation.max.string', ['max' => ':max']),
-            ],
-            'min' => [
-                'string' => trans('validation.min.string', ['min' => ':min']),
-            ],
-            'email' => trans('validation.email'),
-            'unique' => trans('validation.unique'),
-            'url' => trans('validation.url'),
-            'date' => trans('validation.date'),
-            'before_or_equal' => trans('validation.before_or_equal'),
-            'confirmed' => trans('validation.confirmed'),
-            'array' => trans('validation.array'),
+            'full_name.required' => trans('validation.required', ['attribute' => 'full name']),
+            'full_name.string' => trans('validation.string', ['attribute' => 'full name']),
+            'full_name.max' => trans('validation.max.string', ['attribute' => 'full name', 'max' => 255]),
+            'full_name.min' => trans('validation.min.string', ['attribute' => 'full name', 'min' => 5]),
+
+            'email.required' => trans('validation.required', ['attribute' => 'email']),
+            'email.string' => trans('validation.string', ['attribute' => 'email']),
+            'email.email' => trans('validation.email', ['attribute' => 'email']),
+            'email.unique' => trans('validation.unique', ['attribute' => 'email']),
+
+            'password.required' => trans('validation.required', ['attribute' => 'password']),
+            'password.string' => trans('validation.string', ['attribute' => 'password']),
+            'password.min' => trans('validation.min.string', ['attribute' => 'password', 'min' => 5]),
+            'password.confirmed' => trans('validation.confirmed', ['attribute' => 'password']),
+
+            'phone_number.required' => trans('validation.required', ['attribute' => 'phone number']),
+            'phone_number.string' => trans('validation.string', ['attribute' => 'phone number']),
+            'phone_number.regex' => trans('validation.regex', ['attribute' => 'phone number']),
         ];
     }
 }

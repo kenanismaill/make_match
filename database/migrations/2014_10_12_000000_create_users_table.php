@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('full_name')->index();
             $table->string('email')->unique();
             $table->tinyInteger('status')->default(UserType::SUBSCRIBER);
+            $table->string('phone_number');
+            $table->string('photo')->nullable();
+            $table->text('about_me')->nullable();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
