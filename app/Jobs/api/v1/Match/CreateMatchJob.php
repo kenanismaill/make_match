@@ -50,6 +50,7 @@ class CreateMatchJob implements ShouldQueue
         $awayTeamPlayers = $matchTeam->awayTeam->players->pluck('id')->toArray();
         $match->players()->sync(array_values(array_diff($homeTeamPlayers, $awayTeamPlayers)));
         Notification::send($this->user,new CreateMatchNotification());
+        $this->user->notify(new CreateMatchNotification());
     }
 
     /**

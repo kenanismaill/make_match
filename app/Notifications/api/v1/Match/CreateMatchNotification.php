@@ -45,8 +45,7 @@ class CreateMatchNotification extends Notification
     public function toVonage(object $notifiable): VonageMessage
     {
         return (new VonageMessage)
-            ->clientReference((string) $notifiable->id)
-            ->content('match has created');
+            ->content('Your SMS message content');
     }
 
     /**
